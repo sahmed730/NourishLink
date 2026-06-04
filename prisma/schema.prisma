@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int          @id @default(autoincrement())
+  email         String       @unique
+  passwordHash  String
+  fullName      String
+  role          String       // 'restaurant' | 'ngo' | 'admin'
+  phone         String?
+  isActive      Boolean      @default(true)
+  emailVerified Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  restaurant    Restaurant?
+  ngo           NGO?
+}
+
+model Restaurant {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  user      User       @relation(fields: [userId], references: [id])
+  name      String
+  address   String
+  latitude  Float
+  longitude Float
+  cuisine   String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  donations Donation[]
+}
+
+model NGO {
+  id              Int      @id @default(autoincrement())
+  userId          Int      @unique
+  user            User     @relation(fields: [userId], references: [id])
+  name            String
+  address         String
+  latitude        Float
+  longitude       Float
+  capacityKg      Float?
+  vehicleType     String   // 'bike' | 'car' | 'van' | 'truck'
+  serviceRadiusKm Float    @default(10.0)
+  isAccepting     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  matches Match[]
+  routes  Route[]
+}
+
+model Donation {
+  id                Int       @id @default(autoincrement())
+  restaurantId      Int
+  restaurant        Restaurant @relation(fields: [restaurantId], references: [id])
+  title             String
+  description       String?
+  foodType          String    // 'cooked' | 'raw' | 'packaged' | 'bakery'
+  quantityKg        Float
+  servings          Int?
+  preparedAt        DateTime?
+  expiresAt         DateTime
+  pickupWindowStart DateTime
+  pickupWindowEnd   DateTime
+  status            String    @default("available") // 'available' | 'matched' | 'picked_up' | 'expired'
+  latitude          Float
+  longitude         Float
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  matches Match[]
+}
+
+model Match {
+  id         Int      @id @default(autoincrement())
+  donationId Int
+  donation   Donation @relation(fields: [donationId], references: [id])
+  ngoId      Int
+  ngo        NGO      @relation(fields: [ngoId], references: [id])
+  distanceKm Float
+  score      Float
+  status     String   @default("pending") // 'pending' | 'accepted' | 'expired'
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  pickup Pickup?
+}
+
+model Pickup {
+  id                   Int       @id @default(autoincrement())
+  matchId              Int       @unique
+  match                Match     @relation(fields: [matchId], references: [id])
+  status               String    @default("accepted") // 'accepted' | 'en_route' | 'arrived' | 'completed'
+  collectedKg          Float?
+  verificationPhotoUrl String?
+  notes                String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model Route {
+  id               Int      @id @default(autoincrement())
+  ngoId            Int
+  ngo              NGO      @relation(fields: [ngoId], references: [id])
+  date             DateTime
+  stopsJson        String
+  totalDistanceKm  Float
+  totalDurationMin Float
+  createdAt        DateTime @default(now())
+}
