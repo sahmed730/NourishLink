@@ -1,5 +1,5 @@
-import { prisma } from './prisma'
-import { haversineKm } from './geo'
+import { prisma } from '../prisma'
+import { haversineKm } from '../geo'
 import type { Donation, NGO } from '@prisma/client'
 
 const MATCH_WEIGHTS = {
@@ -16,7 +16,7 @@ const VEHICLE_SCORES: Record<string, (qty: number) => number> = {
   bike:  (qty) => (qty < 5   ? 0.4 : 0.0),
 }
 
-function computeScore(donation: Donation, ngo: NGO, distanceKm: number): number {
+export function computeScore(donation: Donation, ngo: NGO, distanceKm: number): number {
   const proximity = Math.max(0, 1 - distanceKm / ngo.serviceRadiusKm)
 
   const capacity =

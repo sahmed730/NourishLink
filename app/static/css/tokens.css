@@ -1,0 +1,91 @@
+:root {
+  /* Brand */
+  --color-brand-50: #F1F8F2;
+  --color-brand-100: #D9EBDC;
+  --color-brand-300: #82BC8A;
+  --color-brand-500: #3D9A4E;
+  --color-brand-600: #2F7A3D;
+  --color-brand-700: #1F5A2C;
+
+  /* Accent */
+  --color-accent-500: #F4A03A;
+  --color-accent-600: #D98015;
+
+  /* Neutrals (High Contrast Monochrome) */
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-50: #F7F7F7;
+  --color-neutral-100: #EAEAEA;
+  --color-neutral-200: #CCCCCC;
+  --color-neutral-400: #888888;
+  --color-neutral-600: #333333;
+  --color-neutral-800: #111111;
+  --color-neutral-900: #000000;
+
+  /* Status */
+  --color-status-available: var(--color-brand-500);
+  --color-status-matched: #3A7BD5;
+  --color-status-in-transit: var(--color-accent-500);
+  --color-status-picked-up: #6F4FB8;
+  --color-status-expired: var(--color-neutral-400);
+  --color-status-cancelled: #C5483B;
+
+  /* Feedback */
+  --color-success-500: var(--color-brand-600);
+  --color-warning-500: var(--color-accent-600);
+  --color-error-500: #C5483B;
+  --color-info-500: #3A7BD5;
+
+  /* Typography: Scale (Ario uses huge fonts) */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 18px;
+  --font-size-md: 24px;
+  --font-size-lg: 32px;
+  --font-size-xl: 48px;
+  --font-size-2xl: 64px;
+  --font-size-3xl: 80px;
+
+  /* Typography: Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Elevation (Shadows) */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+
+  /* Radius (Strictly sharp edges) */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-pill: 0px;
+
+  /* Motion: Durations */
+  --duration-fast: 100ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  /* Motion: Easings */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Focus */
+  --color-focus: #3A7BD5;
+}

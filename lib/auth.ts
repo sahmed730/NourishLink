@@ -21,7 +21,7 @@ export async function signToken(payload: { sub: number; role: string }): Promise
 
 export async function verifyToken(token: string): Promise<JWTPayload> {
   const { payload } = await jwtVerify(token, secret)
-  return payload as JWTPayload
+  return payload as unknown as JWTPayload
 }
 
 export function getTokenFromHeader(authHeader: string | null): string | null {
