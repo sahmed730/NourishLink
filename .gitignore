@@ -52,3 +52,4 @@ test-results/
 /.agents/
 /skills-lock.json
 
+.vercel
