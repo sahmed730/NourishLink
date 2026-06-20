@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
   });
 
   // 3. Rules-Based "Nourish Intelligence" (AI Insights)
-  const insights = [];
+  const insights: { type: string; text: string }[] = [];
   
   // Calculate active donations vs NGOs
   const activeDonations = await prisma.donation.count({ where: { status: 'available' } });
@@ -100,7 +100,7 @@ export async function GET(req: NextRequest) {
     where: { role: { in: ['restaurant', 'ngo'] } }
   });
 
-  const activityFeed = [];
+  const activityFeed: { id: string; type: string; title: string; time: Date; icon: string }[] = [];
   
   latestDonations.forEach(d => {
     activityFeed.push({

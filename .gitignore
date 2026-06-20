@@ -47,3 +47,8 @@ test-results/
 # Prisma
 *.db
 *.db-journal
+
+# AI Agent files
+/.agents/
+/skills-lock.json
+
